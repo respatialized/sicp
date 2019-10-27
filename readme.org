@@ -1,0 +1,17 @@
+* SICP
+  #+DOWNLOADED: file://.sicp/sicp.jpg @ 2019-10-27 14:46:35
+[[file:SICP/sicp_2019-10-27_14-46-35.jpg]]
+
+A repo to track my progress through [[https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/][Structure and Interpretation of Computer Programs]] using [[https://github.com/sarabander/sicp][Andreas Raba's EPUB version]]. 
+
+Notes are captured heterogeneously on paper and in ~notes.org~. I make no promise of reconciling the two. 
+
+** Setting it up
+1. Racket (make sure it's installed).
+2. Run ~raco pkg install sicp~ to add ~#lang sicp~ to the directives supported by Racket.
+3. Read.
+4. Reflect.
+5. Record
+6. REPL.
+
+#+STARTUP: inlineimages
