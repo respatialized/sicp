@@ -33,3 +33,18 @@
 (define ex1.6-initial "it works, because the else expression only encounters one condition before, so whether it gets evaluated depends just on the truth of the first predicate.")
 
 (define ex1.6-actual "the program never terminates, because the else returns an unevalutated expression, which just expands the form recursively forever.")
+
+(define ex1.7-examples '((* (sqrt 0.0000025) (sqrt 0.0000025))
+                         (* (sqrt 124444444444400000000000) (sqrt 124444444444400000000000))))
+
+(define ex1.7-explanation "the first example fails because it yields 0.000978 for the square root of 0.0000025 - so it's off by a couple of orders of magnitude. the second example doesn't terminate, which I think is because the integers given are so big that the program can't keep track of the mantissa and therefore can't determine whether the number passes the (good-enough?) threshold.")
+
+(define (good-enough-frac? guess x)
+  (< (abs (- 1 (/ x (* guess guess)))) 0.001))
+
+(define (ex1.7 guess x) (if (good-enough-frac? guess x) guess
+                            (ex1.7 (improve guess x) x)))
+(define (sqrt-1.7 x) (ex1.7 1.0 x))
+
+(define ex1.7-examples-2 '((sqrt-1.7 0.0000025) (sqrt-1.7 124444444444400000000000)))
+;; it indeed works better.
