@@ -48,3 +48,11 @@
 
 (define ex1.7-examples-2 '((sqrt-1.7 0.0000025) (sqrt-1.7 124444444444400000000000)))
 ;; it indeed works better.
+
+
+(define (improve-cube guess x) (/ (+ (/ x (* guess guess)) (* 2 guess)) 3))
+(define (good-enough-cube-frac? guess x)
+  (< (abs (- 1 (/ x (* guess guess guess)))) 0.001))
+(define (ex1.8 guess x)
+  (if (good-enough-cube-frac? guess x) guess
+      (ex1.8 (improve-cube guess x) x)))
