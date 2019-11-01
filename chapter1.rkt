@@ -56,3 +56,16 @@
 (define (ex1.8 guess x)
   (if (good-enough-cube-frac? guess x) guess
       (ex1.8 (improve-cube guess x) x)))
+
+(define ex1.9 "the first is recursive, because it has to fully expand the successive list of (inc) calls before reducing to the final sum. the second is linear iterative - each stage only has one call to (+), and the reduction happens before the call.")
+
+
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+
+(define ex1.10-examples '(1024 65536 65536))
+(define ex1.10-closedform '("2n" "2^N" "2^(2^N)"))
