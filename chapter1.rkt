@@ -69,3 +69,46 @@
 
 (define ex1.10-examples '(1024 65536 65536))
 (define ex1.10-closedform '("2n" "2^N" "2^(2^N)"))
+
+
+(define (count-change amount)
+  (cc amount 5))
+
+(define (cc amount kinds-of-coins)
+  (cond ((= amount 0) 1)
+        ((or (< amount 0)
+             (= kinds-of-coins 0))
+         0)
+        (else
+         (+ (cc amount (- kinds-of-coins 1))
+            (cc (- amount (first-denomination
+                           kinds-of-coins))
+                kinds-of-coins)))))
+
+(define (first-denomination kinds-of-coins)
+  (cond ((= kinds-of-coins 1) 1)
+        ((= kinds-of-coins 2) 5)
+        ((= kinds-of-coins 3) 10)
+        ((= kinds-of-coins 4) 25)
+        ((= kinds-of-coins 5) 50)))
+
+(define (ex1.10-recursive n)
+  (if (< n 3) n
+      (+ (ex1.10-recursive (- n 1))
+         (* 2 (ex1.10-recursive (- n 2)))
+         (* 3 (ex1.10-recursive (- n 3))))))
+
+(define (fib n)
+  (define (iter a b count)
+    (if (= count 0) b
+        (iter b (+ a b) (- count 1))))
+  (iter 0 1 n))
+
+
+(define (ex1.10-iterative n)
+  ;; to do it iteratively, you have to hold on to three pieces of data.
+  (define (iter a b c count)
+    (if (= count 0) c
+        (iter b c (+ c (* 2 b) (* 3 a)) (- count 1))))
+  (if (<= n 3) n
+      (iter 1 2 3 (- n 3))))
