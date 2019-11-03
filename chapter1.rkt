@@ -112,3 +112,27 @@
         (iter b c (+ c (* 2 b) (* 3 a)) (- count 1))))
   (if (<= n 3) n
       (iter 1 2 3 (- n 3))))
+
+(define (conj i l)
+  (reverse (cons i (reverse l))))
+
+(define (ex1.12 n)
+  (define (build-row-iter items acc)
+    (let ((h (car items))
+          (rest (cdr items))
+          (t (car (cdr items))))
+
+      (if ;; base case: last element is one
+       (= 1 t)
+       (conj 1 (conj (+ h t) acc))
+       (build-row-iter rest (conj (+ h t) acc)))))
+
+  (define (next-row row)
+    (if (= (length row) 1) '(1 1)
+        (build-row-iter row '(1))))
+
+  (define (iter row count)
+    (if (= n count) row
+        (iter (next-row row) (+ count 1))))
+  (if (= n 1) '(1)
+      (iter '(1) 0)))
