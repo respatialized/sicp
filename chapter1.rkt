@@ -136,3 +136,12 @@
         (iter (next-row row) (+ count 1))))
   (if (= n 1) '(1)
       (iter '(1) 0)))
+
+
+(define (pow x n)
+  (define (iter y c)
+    (if (= c 1) y
+        (iter (* y x) (- c 1))))
+  (iter x n))
+
+
