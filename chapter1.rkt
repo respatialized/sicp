@@ -142,6 +142,13 @@
   (define (iter y c)
     (if (= c 1) y
         (iter (* y x) (- c 1))))
-  (iter x n))
+ (iter x n))
 
+
+(define (cube x) (pow x 3))
+(define (p x) (- (* 3 x) (* 4 (cube x))))
+(define (sine angle)
+  (if (not (> (abs angle) 0.1))
+      angle
+      (p (sine (/ angle 3.0)))))
 
