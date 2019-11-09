@@ -182,16 +182,15 @@
 
 (define (ex1.17 x y)
   (cond ((= y 0) 0)
-        ((even? y) (ex1.17 (double x) (/ y 2)))
+        ((even? y) (ex1.17 (double x) (halve y)))
         (else (+ x (ex1.17 x (- y 1))))))
 
 ;; logarithmic iterative multiplication
 (define (ex1.18 x y)
-  (define (iter a b)
+  (define (iter acc count)
     (cond
-      ((= b 0) 0)
-      ((= b 1) a)
-      ((even? b) (iter (+ x (double a)) (halve b)))
-      (else (iter (+ a x) (dec b))))
-    )
-  (iter x y))
+      ((= count 1) acc)
+      ((even? count) (iter (double acc) (halve count)))
+      (else (iter (+ acc x) (dec count)))))
+  (if (= y 0) 0
+      (iter x y)))
