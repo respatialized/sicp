@@ -152,3 +152,25 @@
       angle
       (p (sine (/ angle 3.0)))))
 
+(define (square x) (* x x))
+(define (even? n) (= (remainder n 2) 0))
+
+(define (fast-pow x n)
+  (cond ((= n 0) 1)
+        ((even? n)
+         (square (fast-pow x (/ n 2))))
+        (else
+         (* x (fast-pow x (- n 1))))))
+
+;; iterative logarithmic exponent
+(define (ex1.16 x n)
+  (define (iter x n a)
+    (cond
+      ((= n 0) a)
+      ;; ((= n 1) a)
+      ((even? n) (iter x (/ n 2) (* a (square x))))
+      (else (iter x (- n 1) (* x a)))
+      ))
+  (cond ((= n 0) 1)
+        ((= n 1) x)
+        (else (iter x (- n 1) 1))))
