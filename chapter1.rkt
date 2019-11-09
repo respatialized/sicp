@@ -174,3 +174,24 @@
   (cond ((= n 0) 1)
         ((= n 1) x)
         (else (iter x (- n 1) 1))))
+
+(define (double x) (+ x x))
+(define (halve x) (/ x 2))
+
+;; logarithmic multiplication
+
+(define (ex1.17 x y)
+  (cond ((= y 0) 0)
+        ((even? y) (ex1.17 (double x) (/ y 2)))
+        (else (+ x (ex1.17 x (- y 1))))))
+
+;; logarithmic iterative multiplication
+(define (ex1.18 x y)
+  (define (iter a b)
+    (cond
+      ((= b 0) 0)
+      ((= b 1) a)
+      ((even? b) (iter (+ x (double a)) (halve b)))
+      (else (iter (+ a x) (dec b))))
+    )
+  (iter x y))
